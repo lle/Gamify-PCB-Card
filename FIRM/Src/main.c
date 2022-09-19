@@ -6,22 +6,20 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2022 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
 #include "tim.h"
-#include "tsc.h"
 #include "usart.h"
 #include "gpio.h"
 
@@ -29,7 +27,6 @@
 /* USER CODE BEGIN Includes */
 
 
-#include "touchController.h"
 #include "screenBuffer.h"
 #include "ascii_letter.h"
 #include "game_snake.h"
@@ -77,7 +74,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -97,35 +93,33 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_TSC_Init();
   MX_USART1_UART_Init();
   MX_TIM16_Init();
+  MX_ADC_Init();
   /* USER CODE BEGIN 2 */
 
 
 
-	//start timer for screen refresh
-	HAL_TIM_Base_Start_IT(&htim16);
-	
-	//init capacitive touch
-	tsc_capsense_init();
-	HAL_Delay(100);
+  //Generate seed from floating ADC pin
+  HAL_ADC_Start(&hadc);
+  uint32_t seed = 0;
+  uint32_t currentVal = 0;
+  for(int i=0; i<10; i++)
+  {
+	  HAL_ADC_PollForConversion(&hadc, 0xFF);
+	  currentVal = HAL_ADC_GetValue(&hadc);
+	  seed = seed + currentVal;
+	  HAL_Delay(2);
+  }
+  srand(seed);	//input seed into sRand
 
-	//randomize seed
-	uint16_t total_tsc = 0;
-	for(int i=0; i<6; i++)
-	{
-		total_tsc = total_tsc + tsc_get_capsense_threshold_raw(i) + tsc_get_capsense_raw(i);
-	}
-	srand( total_tsc );
-	
-	//start a new game
-	game_startNewGame();
+  //start timer for screen refresh
+  HAL_TIM_Base_Start_IT(&htim16);
+  game_startNewGame();
+
 
 
   /* USER CODE END 2 */
- 
- 
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -135,61 +129,20 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 
-		
-		snake_runGame();
-		
-		if(tsc_get_capsense(TSC_UP) == TOUCH_DETECTED)
-			snake_set_new_direction(GOING_UP);
-		
-		else if(tsc_get_capsense(TSC_DOWN) == TOUCH_DETECTED)
-			snake_set_new_direction(GOING_DOWN);
-		
-		else if(tsc_get_capsense(TSC_LEFT) == TOUCH_DETECTED)
-			snake_set_new_direction(GOING_LEFT);	
-		
-		else if(tsc_get_capsense(TSC_RIGHT) == TOUCH_DETECTED)
-			snake_set_new_direction(GOING_RIGHT);
-		
-//		uint32_t ts_cycleLetter = 0;		
-//		if(tsc_get_capsense(TSC_UP) == TOUCH_DETECTED)
-//		{
-//			screen_show_letter(ASCII_UPPER_U);
-//		}
-//		else if(tsc_get_capsense(TSC_DOWN) == TOUCH_DETECTED)
-//		{
-//			screen_show_letter(ASCII_UPPER_D);
-//		}
-//		else if(tsc_get_capsense(TSC_LEFT) == TOUCH_DETECTED)
-//		{
-//			screen_show_letter(ASCII_UPPER_L);
-//		}
-//		else if(tsc_get_capsense(TSC_RIGHT) == TOUCH_DETECTED)
-//		{
-//			screen_show_letter(ASCII_UPPER_R);
-//		}
-//		else if(tsc_get_capsense(TSC_BTN_A) == TOUCH_DETECTED)
-//		{
-//			screen_show_letter(ASCII_LOWER_A);
-//		}
-//		else if(tsc_get_capsense(TSC_BTN_B) == TOUCH_DETECTED)
-//		{
-//			screen_show_letter(ASCII_LOWER_B);
-//		}	
-//		else
-//		{	
-//			if(HAL_GetTick() - ts_cycleLetter > 200)
-//			{
-//				ts_cycleLetter = HAL_GetTick();
-//				screen_show_letter(ASCII_DOT);
-//				/*
-//				static uint8_t letter_id = 32;
-//				screen_show_letter(letter_id++);
-//				if(letter_id == 127) { letter_id = 32; }
-//				*/
-//			}
-//		}
-		
-		
+
+	  snake_runGame();
+
+	  if(HAL_GPIO_ReadPin(BTN2_GPIO_Port, BTN2_Pin) == GPIO_PIN_RESET)
+		  snake_set_new_direction(GOING_UP);
+
+	  else if(HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin) == GPIO_PIN_RESET)
+		  snake_set_new_direction(GOING_DOWN);
+
+	  else if(HAL_GPIO_ReadPin(BTN3_GPIO_Port, BTN3_Pin) == GPIO_PIN_RESET)
+		  snake_set_new_direction(GOING_LEFT);
+
+	  else if(HAL_GPIO_ReadPin(BTN4_GPIO_Port, BTN4_Pin) == GPIO_PIN_RESET)
+		  snake_set_new_direction(GOING_RIGHT);
   }
   /* USER CODE END 3 */
 }
@@ -204,17 +157,21 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_HSI14;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.HSI14State = RCC_HSI14_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.HSI14CalibrationValue = 16;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+
+  /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1;
@@ -246,7 +203,10 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* User can add his own implementation to report the HAL error return state */
-
+  __disable_irq();
+  while (1)
+  {
+  }
   /* USER CODE END Error_Handler_Debug */
 }
 
@@ -258,13 +218,11 @@ void Error_Handler(void)
   * @param  line: assert_param error line source number
   * @retval None
   */
-void assert_failed(char *file, uint32_t line)
-{ 
+void assert_failed(uint8_t *file, uint32_t line)
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
-     tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

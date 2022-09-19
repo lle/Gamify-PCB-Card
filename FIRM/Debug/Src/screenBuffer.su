@@ -1,0 +1,6 @@
+../Src/screenBuffer.c:20:9:screen_get_bit	16	static
+../Src/screenBuffer.c:25:6:screen_set_bit	24	static
+../Src/screenBuffer.c:30:6:screen_show_letter	32	static
+../Src/screenBuffer.c:46:6:screen_fill	16	static
+../Src/screenBuffer.c:57:6:screen_clear	16	static
+../Src/screenBuffer.c:68:6:screen_interruptUpdate	16	static

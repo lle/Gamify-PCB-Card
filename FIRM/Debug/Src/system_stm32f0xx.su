@@ -1,0 +1,2 @@
+../Src/system_stm32f0xx.c:128:6:SystemInit	8	static
+../Src/system_stm32f0xx.c:174:6:SystemCoreClockUpdate	24	static

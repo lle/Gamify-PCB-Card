@@ -7,13 +7,12 @@
   ******************************************************************************
   * @attention
   *
-  * <h2><center>&copy; Copyright (c) 2020 STMicroelectronics.
-  * All rights reserved.</center></h2>
+  * Copyright (c) 2022 STMicroelectronics.
+  * All rights reserved.
   *
-  * This software component is licensed by ST under BSD 3-Clause license,
-  * the "License"; You may not use this file except in compliance with the
-  * License. You may obtain a copy of the License at:
-  *                        opensource.org/licenses/BSD-3-Clause
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -63,18 +62,18 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define TSC_UP_Pin GPIO_PIN_1
-#define TSC_UP_GPIO_Port GPIOA
-#define TSC_DN_Pin GPIO_PIN_2
-#define TSC_DN_GPIO_Port GPIOA
-#define TSC_L_Pin GPIO_PIN_3
-#define TSC_L_GPIO_Port GPIOA
-#define TSC_R_Pin GPIO_PIN_5
-#define TSC_R_GPIO_Port GPIOA
-#define TSC_A_Pin GPIO_PIN_6
-#define TSC_A_GPIO_Port GPIOA
-#define TSC_B_Pin GPIO_PIN_7
-#define TSC_B_GPIO_Port GPIOA
+#define BTN2_Pin GPIO_PIN_1
+#define BTN2_GPIO_Port GPIOA
+#define BTN3_Pin GPIO_PIN_2
+#define BTN3_GPIO_Port GPIOA
+#define BTN4_Pin GPIO_PIN_3
+#define BTN4_GPIO_Port GPIOA
+#define BTN1_Pin GPIO_PIN_5
+#define BTN1_GPIO_Port GPIOA
+#define BTB_Pin GPIO_PIN_6
+#define BTB_GPIO_Port GPIOA
+#define BTA_Pin GPIO_PIN_7
+#define BTA_GPIO_Port GPIOA
 #define LED_P_0_Pin GPIO_PIN_0
 #define LED_P_0_GPIO_Port GPIOB
 #define LED_P_1_Pin GPIO_PIN_1
@@ -116,5 +115,3 @@ void Error_Handler(void);
 #endif
 
 #endif /* __MAIN_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

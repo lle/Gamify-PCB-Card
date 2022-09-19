@@ -1,0 +1,12 @@
+../Src/game_snake.c:60:6:game_startNewGame	16	static
+../Src/game_snake.c:81:6:generate_food	16	static
+../Src/game_snake.c:96:6:snake_runGame	24	static
+../Src/game_snake.c:175:9:validate_direction_change	32	static
+../Src/game_snake.c:214:6:update_snake_head	16	static
+../Src/game_snake.c:248:9:food_detection	32	static
+../Src/game_snake.c:298:9:collision_detection	32	static
+../Src/game_snake.c:348:6:game_over_animation	40	static
+../Src/game_snake.c:392:6:increment_snake_body	32	static
+../Src/game_snake.c:408:6:remove_snake_tail	16	static
+../Src/game_snake.c:422:6:snake_set_new_direction	16	static
+../Src/game_snake.c:427:9:process_new_direction_request	16	static

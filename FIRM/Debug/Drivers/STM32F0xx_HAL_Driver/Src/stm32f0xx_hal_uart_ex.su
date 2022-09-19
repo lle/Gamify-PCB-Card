@@ -1,0 +1,5 @@
+../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart_ex.c:150:19:HAL_RS485Ex_Init	32	static
+../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart_ex.c:344:19:HAL_MultiProcessorEx_AddressLength_Set	16	static
+../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart_ex.c:496:19:HAL_UARTEx_ReceiveToIdle	40	static
+../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart_ex.c:637:19:HAL_UARTEx_ReceiveToIdle_IT	56	static,ignoring_inline_asm
+../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart_ex.c:715:19:HAL_UARTEx_ReceiveToIdle_DMA	56	static,ignoring_inline_asm

@@ -1,0 +1,2 @@
+../Src/ledHandler.c:3:6:matrix_setLed_on	16	static
+../Src/ledHandler.c:12:6:matrix_setLed_allOff	8	static

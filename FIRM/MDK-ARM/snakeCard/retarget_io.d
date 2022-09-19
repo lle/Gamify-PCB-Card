@@ -1,9 +1,0 @@
-snakecard\retarget_io.o: C:\Users\Lam\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.2\Source\retarget_io.c
-snakecard\retarget_io.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-snakecard\retarget_io.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-snakecard\retarget_io.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-snakecard\retarget_io.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-snakecard\retarget_io.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\assert.h
-snakecard\retarget_io.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\rt_sys.h
-snakecard\retarget_io.o: .\RTE\_snakeCard\RTE_Components.h
-snakecard\retarget_io.o: C:\Users\Lam\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.2\Include\EventRecorder.h
