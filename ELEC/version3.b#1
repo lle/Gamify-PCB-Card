@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="25" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -2909,7 +2909,6 @@
 <wire x1="32.385" y1="3.175" x2="43.18" y2="3.175" width="0.254" layer="121"/>
 <wire x1="43.18" y1="0.635" x2="32.385" y2="0.635" width="0.254" layer="121"/>
 <wire x1="43.18" y1="0.635" x2="43.18" y2="3.175" width="0.254" layer="121" curve="180"/>
-<circle x="37.084" y="9.017" radius="0.283978125" width="0.1524" layer="121"/>
 </plain>
 <libraries>
 <library name="testpad" urn="urn:adsk.eagle:library:385">

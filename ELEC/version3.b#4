@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -101,7 +101,7 @@
 <layer number="118" name="Rect_Pads" color="7" fill="1" visible="no" active="yes"/>
 <layer number="119" name="KAP_TEKEN" color="7" fill="1" visible="no" active="yes"/>
 <layer number="120" name="KAP_MAAT1" color="7" fill="1" visible="no" active="yes"/>
-<layer number="121" name="_tsilk" color="13" fill="1" visible="yes" active="yes"/>
+<layer number="121" name="_tsilk" color="13" fill="1" visible="no" active="yes"/>
 <layer number="122" name="_bsilk" color="21" fill="1" visible="no" active="yes"/>
 <layer number="123" name="tTestmark" color="7" fill="1" visible="no" active="yes"/>
 <layer number="124" name="bTestmark" color="7" fill="1" visible="no" active="yes"/>
@@ -2898,18 +2898,6 @@
 <rectangle x1="24.405590625" y1="79.06194375" x2="24.839928125" y2="79.1490625" layer="122" rot="R180"/>
 <rectangle x1="24.405590625" y1="79.149065625" x2="24.664665625" y2="79.235934375" layer="122" rot="R180"/>
 <rectangle x1="24.4055875" y1="79.235934375" x2="24.57830625" y2="79.323053125" layer="122" rot="R180"/>
-<text x="19.685" y="24.765" size="3.81" layer="121" font="vector">+</text>
-<text x="36.83" y="51.435" size="1.016" layer="121" font="vector" rot="R45">- +</text>
-<text x="34.036" y="1.143" size="1.6256" layer="121">ON/OFF</text>
-<polygon width="0.254" layer="121">
-<vertex x="29.845" y="1.905"/>
-<vertex x="32.385" y="3.175"/>
-<vertex x="32.385" y="0.635"/>
-</polygon>
-<wire x1="32.385" y1="3.175" x2="43.18" y2="3.175" width="0.254" layer="121"/>
-<wire x1="43.18" y1="0.635" x2="32.385" y2="0.635" width="0.254" layer="121"/>
-<wire x1="43.18" y1="0.635" x2="43.18" y2="3.175" width="0.254" layer="121" curve="180"/>
-<circle x="37.084" y="9.017" radius="0.283978125" width="0.1524" layer="121"/>
 </plain>
 <libraries>
 <library name="testpad" urn="urn:adsk.eagle:library:385">
@@ -4868,12 +4856,12 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="11.43" y="29.083" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
 </element>
 <element name="U$1" library="batteryHolder_BH-74F-5" package="BH-74F-5" value="BH-74F-5" x="13.97" y="13.97" smashed="yes" rot="R45"/>
-<element name="SW1" library="SSSS811101" package="SW4_SSSS811101_ALPS" value="SSSS811101SW4_SSSS811101_ALPS" x="25.4" y="1.905" smashed="yes" rot="R90">
-<attribute name="COPYRIGHT" value="Copyright (C) 2023 Ultra Librarian. All rights reserved." x="25.4" y="1.905" size="0.17271875" layer="27" font="vector" rot="R90" display="off"/>
-<attribute name="MANUFACTURER_PART_NUMBER" value="SSSS811101" x="25.4" y="1.905" size="0.17271875" layer="27" font="vector" rot="R90" display="off"/>
-<attribute name="MFR_NAME" value="Alps Electric" x="25.4" y="1.905" size="0.17271875" layer="27" font="vector" rot="R90" display="off"/>
-<attribute name="NAME" x="20.32" y="4.445" size="1.27" layer="27" ratio="6" rot="R90"/>
-<attribute name="VALUE" x="21.59" y="4.445" size="1.27" layer="27" ratio="6" rot="R90"/>
+<element name="SW1" library="SSSS811101" package="SW4_SSSS811101_ALPS" value="SSSS811101SW4_SSSS811101_ALPS" x="25.4" y="2.54" smashed="yes" rot="R90">
+<attribute name="COPYRIGHT" value="Copyright (C) 2023 Ultra Librarian. All rights reserved." x="25.4" y="2.54" size="0.17271875" layer="27" font="vector" rot="R90" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="SSSS811101" x="25.4" y="2.54" size="0.17271875" layer="27" font="vector" rot="R90" display="off"/>
+<attribute name="MFR_NAME" value="Alps Electric" x="25.4" y="2.54" size="0.17271875" layer="27" font="vector" rot="R90" display="off"/>
+<attribute name="NAME" x="20.32" y="5.08" size="1.27" layer="27" ratio="6" rot="R90"/>
+<attribute name="VALUE" x="21.59" y="5.08" size="1.27" layer="27" ratio="6" rot="R90"/>
 </element>
 </elements>
 <signals>
@@ -4905,10 +4893,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <contactref element="S6" pad="2"/>
 <contactref element="S3" pad="2"/>
 <contactref element="U$1" pad="P$2"/>
-<contactref element="SW1" pad="3"/>
-<contactref element="SW1" pad="4"/>
-<contactref element="SW1" pad="2"/>
-<contactref element="SW1" pad="1"/>
 </signal>
 <signal name="+3V3">
 <contactref element="C9" pad="1"/>
@@ -4940,9 +4924,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="36.4617" y1="11.22" x2="28.746" y2="11.22" width="0.2032" layer="1"/>
 <wire x1="28.746" y1="11.22" x2="28.702" y2="11.176" width="0.2032" layer="1"/>
 <contactref element="SW1" pad="7"/>
-<wire x1="23.1572" y1="3.6146" x2="23.1572" y2="5.4178" width="0.7112" layer="1"/>
-<wire x1="23.1572" y1="5.4178" x2="22.86" y2="5.715" width="0.7112" layer="1"/>
-<via x="22.86" y="5.715" extent="1-16" drill="0.35"/>
+<wire x1="28.702" y1="11.176" x2="29.63" y2="15.494" width="0" layer="19" extent="1-1"/>
+<wire x1="41.89" y1="9.7917" x2="36.4617" y2="11.22" width="0" layer="19" extent="1-1"/>
+<wire x1="23.1572" y1="4.2496" x2="28.702" y2="11.176" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="UART_RX">
 <contactref element="RX" pad="TP"/>
@@ -5796,9 +5780,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </signal>
 <signal name="N$14">
 <contactref element="U$1" pad="P$1"/>
+<wire x1="26.15" y1="19.96264375" x2="23.056321875" y2="23.056321875" width="0.762" layer="1"/>
 <contactref element="SW1" pad="8"/>
-<wire x1="26.1417" y1="3.6146" x2="26.1417" y2="19.97094375" width="0.7112" layer="1"/>
-<wire x1="26.1417" y1="19.97094375" x2="23.056321875" y2="23.056321875" width="0.7112" layer="1"/>
+<wire x1="26.1417" y1="4.2496" x2="26.15" y2="19.96264375" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>

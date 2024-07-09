@@ -11357,7 +11357,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="FRAME4" library="frames" library_urn="urn:adsk.eagle:library:229" deviceset="A4L-LOC" device=""/>
 <part name="U$1" library="batteryHolder_BH-74F-5" deviceset="BH-74F-5" device=""/>
 <part name="SW1" library="SSSS811101" deviceset="SSSS811101" device="SW4_SSSS811101_ALPS"/>
-<part name="GND1" library="SparkFun" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -11898,9 +11897,6 @@ PH6</text>
 <attribute name="NAME" x="315.3146" y="153.8986" size="2.083" layer="95" ratio="6"/>
 <attribute name="VALUE" x="294.3552" y="157.7086" size="2.083" layer="96" ratio="6"/>
 </instance>
-<instance part="GND1" gate="1" x="302.26" y="147.32" smashed="yes">
-<attribute name="VALUE" x="299.72" y="144.78" size="1.778" layer="96"/>
-</instance>
 </instances>
 <busses>
 <bus name="B$1">
@@ -12068,12 +12064,6 @@ PH6</text>
 <pinref part="S3" gate="G$1" pin="2"/>
 <wire x1="363.22" y1="-88.9" x2="363.22" y2="-127" width="0.1524" layer="91"/>
 <junction x="363.22" y="-127"/>
-</segment>
-<segment>
-<pinref part="SW1" gate="A" pin="4"/>
-<wire x1="304.8" y1="152.4" x2="302.26" y2="152.4" width="0.1524" layer="91"/>
-<wire x1="302.26" y1="152.4" x2="302.26" y2="149.86" width="0.1524" layer="91"/>
-<pinref part="GND1" gate="1" pin="GND"/>
 </segment>
 </net>
 <net name="+3V3" class="0">

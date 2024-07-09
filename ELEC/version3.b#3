@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="25" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -28,7 +28,7 @@
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
 <layer number="20" name="Dimension" color="24" fill="1" visible="yes" active="yes"/>
-<layer number="21" name="tPlace" color="7" fill="1" visible="no" active="yes"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
@@ -101,7 +101,7 @@
 <layer number="118" name="Rect_Pads" color="7" fill="1" visible="no" active="yes"/>
 <layer number="119" name="KAP_TEKEN" color="7" fill="1" visible="no" active="yes"/>
 <layer number="120" name="KAP_MAAT1" color="7" fill="1" visible="no" active="yes"/>
-<layer number="121" name="_tsilk" color="13" fill="1" visible="yes" active="yes"/>
+<layer number="121" name="_tsilk" color="13" fill="1" visible="no" active="yes"/>
 <layer number="122" name="_bsilk" color="21" fill="1" visible="no" active="yes"/>
 <layer number="123" name="tTestmark" color="7" fill="1" visible="no" active="yes"/>
 <layer number="124" name="bTestmark" color="7" fill="1" visible="no" active="yes"/>
@@ -2898,18 +2898,6 @@
 <rectangle x1="24.405590625" y1="79.06194375" x2="24.839928125" y2="79.1490625" layer="122" rot="R180"/>
 <rectangle x1="24.405590625" y1="79.149065625" x2="24.664665625" y2="79.235934375" layer="122" rot="R180"/>
 <rectangle x1="24.4055875" y1="79.235934375" x2="24.57830625" y2="79.323053125" layer="122" rot="R180"/>
-<text x="19.685" y="24.765" size="3.81" layer="121" font="vector">+</text>
-<text x="36.83" y="51.435" size="1.016" layer="121" font="vector" rot="R45">- +</text>
-<text x="34.036" y="1.143" size="1.6256" layer="121">ON/OFF</text>
-<polygon width="0.254" layer="121">
-<vertex x="29.845" y="1.905"/>
-<vertex x="32.385" y="3.175"/>
-<vertex x="32.385" y="0.635"/>
-</polygon>
-<wire x1="32.385" y1="3.175" x2="43.18" y2="3.175" width="0.254" layer="121"/>
-<wire x1="43.18" y1="0.635" x2="32.385" y2="0.635" width="0.254" layer="121"/>
-<wire x1="43.18" y1="0.635" x2="43.18" y2="3.175" width="0.254" layer="121" curve="180"/>
-<circle x="37.084" y="9.017" radius="0.283978125" width="0.1524" layer="121"/>
 </plain>
 <libraries>
 <library name="testpad" urn="urn:adsk.eagle:library:385">
@@ -4909,6 +4897,21 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <contactref element="SW1" pad="4"/>
 <contactref element="SW1" pad="2"/>
 <contactref element="SW1" pad="1"/>
+<wire x1="37.084" y1="34.925" x2="44.704" y2="42.545" width="0" layer="19" extent="1-1"/>
+<wire x1="44.8183" y1="16.22" x2="37.084" y2="34.925" width="0" layer="19" extent="1-1"/>
+<wire x1="41.39" y1="9.7917" x2="44.8183" y2="16.22" width="0" layer="19" extent="1-1"/>
+<wire x1="36.4617" y1="11.72" x2="41.39" y2="9.7917" width="0" layer="19" extent="1-1"/>
+<wire x1="31.33" y1="15.494" x2="36.4617" y2="11.72" width="0" layer="19" extent="1-1"/>
+<wire x1="29.63" y1="13.208" x2="31.33" y2="15.494" width="0" layer="19" extent="1-1"/>
+<wire x1="29.05" y1="3.005" x2="29.63" y2="13.208" width="0" layer="19" extent="1-1"/>
+<wire x1="29.05" y1="0.805" x2="29.05" y2="3.005" width="0" layer="19" extent="1-1"/>
+<wire x1="21.75" y1="3.005" x2="29.05" y2="3.005" width="0" layer="19" extent="1-1"/>
+<wire x1="21.75" y1="0.805" x2="21.75" y2="3.005" width="0" layer="19" extent="1-1"/>
+<wire x1="6.792865625" y1="6.792865625" x2="21.75" y2="3.005" width="0" layer="19" extent="1-1"/>
+<wire x1="14.351" y1="34.925" x2="37.084" y2="34.925" width="0" layer="19" extent="1-1"/>
+<wire x1="14.224" y1="33.655" x2="14.351" y2="34.925" width="0" layer="19" extent="1-1"/>
+<wire x1="8.509" y1="38.735" x2="14.351" y2="34.925" width="0" layer="19" extent="1-1"/>
+<wire x1="14.224" y1="43.815" x2="8.509" y2="38.735" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="+3V3">
 <contactref element="C9" pad="1"/>
@@ -4943,6 +4946,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="23.1572" y1="3.6146" x2="23.1572" y2="5.4178" width="0.7112" layer="1"/>
 <wire x1="23.1572" y1="5.4178" x2="22.86" y2="5.715" width="0.7112" layer="1"/>
 <via x="22.86" y="5.715" extent="1-16" drill="0.35"/>
+<wire x1="28.702" y1="11.176" x2="29.63" y2="15.494" width="0" layer="19" extent="1-1"/>
+<wire x1="41.89" y1="9.7917" x2="36.4617" y2="11.22" width="0" layer="19" extent="1-1"/>
+<wire x1="22.86" y1="5.715" x2="28.702" y2="11.176" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="UART_RX">
 <contactref element="RX" pad="TP"/>

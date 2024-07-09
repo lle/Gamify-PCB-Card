@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="5" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="25" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -28,7 +28,7 @@
 <layer number="18" name="Vias" color="2" fill="1" visible="yes" active="yes"/>
 <layer number="19" name="Unrouted" color="6" fill="1" visible="yes" active="yes"/>
 <layer number="20" name="Dimension" color="24" fill="1" visible="yes" active="yes"/>
-<layer number="21" name="tPlace" color="7" fill="1" visible="no" active="yes"/>
+<layer number="21" name="tPlace" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="22" name="bPlace" color="7" fill="1" visible="yes" active="yes"/>
 <layer number="23" name="tOrigins" color="15" fill="1" visible="yes" active="yes"/>
 <layer number="24" name="bOrigins" color="15" fill="1" visible="yes" active="yes"/>
@@ -2900,16 +2900,6 @@
 <rectangle x1="24.4055875" y1="79.235934375" x2="24.57830625" y2="79.323053125" layer="122" rot="R180"/>
 <text x="19.685" y="24.765" size="3.81" layer="121" font="vector">+</text>
 <text x="36.83" y="51.435" size="1.016" layer="121" font="vector" rot="R45">- +</text>
-<text x="34.036" y="1.143" size="1.6256" layer="121">ON/OFF</text>
-<polygon width="0.254" layer="121">
-<vertex x="29.845" y="1.905"/>
-<vertex x="32.385" y="3.175"/>
-<vertex x="32.385" y="0.635"/>
-</polygon>
-<wire x1="32.385" y1="3.175" x2="43.18" y2="3.175" width="0.254" layer="121"/>
-<wire x1="43.18" y1="0.635" x2="32.385" y2="0.635" width="0.254" layer="121"/>
-<wire x1="43.18" y1="0.635" x2="43.18" y2="3.175" width="0.254" layer="121" curve="180"/>
-<circle x="37.084" y="9.017" radius="0.283978125" width="0.1524" layer="121"/>
 </plain>
 <libraries>
 <library name="testpad" urn="urn:adsk.eagle:library:385">
