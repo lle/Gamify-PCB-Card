@@ -26,11 +26,26 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
+#define GAME_SNAKE_ID 0
+#define GAME_RACE_ID 1
+#define GAME_ANIM_ID 2
+#define MAIN_MENU_ID 3
+#define MAX_ANIM_ID 10
+#define DELAY_PER_LETTER 500
 
 #include "screenBuffer.h"
 #include "ascii_letter.h"
 #include "game_snake.h"
+#include "game_racer.h"
+#include "anim_random.h"
+#include "anim_swipe.h"
+#include "anim_name.h"
+#include "anim_ball.h"
+#include "anim_life.h"
 
+uint8_t GAME_MODE = 0;
+uint8_t new_game_select = 0;
+uint8_t currentAnimation = 2;
 
 /* USER CODE END Includes */
 
@@ -62,6 +77,127 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+//void main_menu()
+//{
+//	if(HAL_GPIO_ReadPin(BTN3_GPIO_Port, BTN3_Pin) == GPIO_PIN_RESET)	//left
+//	{
+//		if(new_game_select == 0)
+//			new_game_select = 2;	//wrap-around
+//		else
+//			new_game_select--;
+//		screen_show_letter(new_game_select + ASCII_ONE);	//show the game ID between 1 and 3
+//		HAL_Delay(250);
+//	}
+//
+//	if(HAL_GPIO_ReadPin(BTN4_GPIO_Port, BTN4_Pin) == GPIO_PIN_RESET)	//right
+//	{
+//		new_game_select++;
+//		if(new_game_select == 3)
+//			new_game_select = 0; //wrap-around
+//
+//		screen_show_letter(new_game_select + ASCII_ONE);	//show the game ID between 1 and 3
+//		HAL_Delay(250);
+//	}
+//
+//	if(HAL_GPIO_ReadPin(BTA_GPIO_Port, BTA_Pin) == GPIO_PIN_RESET)	//Confirm new game
+//	{
+//		GAME_MODE = new_game_select;
+//	}
+//}
+
+void game_snake()
+{
+	snake_runGame();
+
+	if(HAL_GPIO_ReadPin(BTN2_GPIO_Port, BTN2_Pin) == GPIO_PIN_RESET)
+	  snake_set_new_direction(GOING_UP);
+
+	else if(HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin) == GPIO_PIN_RESET)
+	  snake_set_new_direction(GOING_DOWN);
+
+	else if(HAL_GPIO_ReadPin(BTN3_GPIO_Port, BTN3_Pin) == GPIO_PIN_RESET)
+	  snake_set_new_direction(GOING_LEFT);
+
+	else if(HAL_GPIO_ReadPin(BTN4_GPIO_Port, BTN4_Pin) == GPIO_PIN_RESET)
+	  snake_set_new_direction(GOING_RIGHT);
+}
+
+void game_anim()
+{
+	static uint32_t schedulerTimestamp_updateName = 0;
+	if( HAL_GPIO_ReadPin(BTN4_GPIO_Port, BTN4_Pin) == GPIO_PIN_RESET )
+	{
+		currentAnimation++;
+		if(currentAnimation == MAX_ANIM_ID)
+			currentAnimation = 0;
+
+		while(HAL_GPIO_ReadPin(BTN4_GPIO_Port, BTN4_Pin) == GPIO_PIN_RESET)
+		{
+			screen_show_letter((currentAnimation < 10)?(ASCII_ZERO + currentAnimation):(ASCII_UPPER_A + currentAnimation - 10));
+			HAL_Delay(100);
+		}
+	}
+	else if( HAL_GPIO_ReadPin(BTN3_GPIO_Port, BTN3_Pin) == GPIO_PIN_RESET )
+	{
+		if(currentAnimation == 0)
+			currentAnimation = MAX_ANIM_ID-1;
+		else
+			currentAnimation--;
+
+		while(HAL_GPIO_ReadPin(BTN3_GPIO_Port, BTN3_Pin) == GPIO_PIN_RESET)
+		{
+			screen_show_letter((currentAnimation < 10)?(ASCII_ZERO + currentAnimation):(ASCII_UPPER_A + currentAnimation - 10));
+			HAL_Delay(100);
+		}
+	}
+
+	switch(currentAnimation)
+	{
+		 case 0:
+			 anim_random_run();
+			 break;
+		 case 1:
+			 if(HAL_GetTick() - schedulerTimestamp_updateName > DELAY_PER_LETTER)
+			 {
+				 schedulerTimestamp_updateName = HAL_GetTick();
+				 anim_name_word("DEFCON32! ");
+			 }
+			 break;
+		 case 2:
+			 anim_horizontal_run();
+			 break;
+		 case 3:
+			 anim_vertical_run();
+			 break;
+		 case 4:
+			 anim_diagonal_run();
+			 break;
+		 case 5:
+			 anim_rotate_run();
+			 break;
+		 case 6:
+			 if(HAL_GetTick() - schedulerTimestamp_updateName > DELAY_PER_LETTER)
+			 {
+				 schedulerTimestamp_updateName = HAL_GetTick();
+				 anim_name_word("RAWR! ^.^ ");
+			 }
+			 break;
+		 case 7:
+			 anim_swipeAll_run();
+			 break;
+		 case 8:
+			 anim_ball_run();
+			 break;
+		 case 9:
+			 anim_life_run();
+			 break;
+		 default:
+			 screen_fill(); HAL_Delay(10);
+			 screen_clear(); HAL_Delay(10);
+			 break;
+	}
+}
 
 /* USER CODE END 0 */
 
@@ -115,34 +251,78 @@ int main(void)
 
   //start timer for screen refresh
   HAL_TIM_Base_Start_IT(&htim16);
-  game_startNewGame();
 
-
+  // SETUP games modes
+  uint8_t firstBoot = 1;
+  anim_life_setup();
+  if(HAL_GPIO_ReadPin(BTA_GPIO_Port, BTA_Pin) == GPIO_PIN_RESET)
+	  GAME_MODE = 1;
+  else if(HAL_GPIO_ReadPin(BTB_GPIO_Port, BTB_Pin) == GPIO_PIN_RESET)
+	  GAME_MODE = 2;
 
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint8_t row,col = 0;
   while (1)
   {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
 
+//	while(HAL_GPIO_ReadPin(BTB_GPIO_Port, BTB_Pin) == GPIO_PIN_RESET && GAME_MODE != MAIN_MENU_ID) //HOLD "B" to enter the main menu
+//	{
+//		//clear the screen
+//		if(row==0 && col==0)
+//			screen_clear();
+//
+//		screen_set_bit(row, col, 1);
+//		col++;
+//		if(col==8)
+//		{
+//			col=0;
+//			row++;
+//		}
+//		if(row==8)
+//		{
+//			GAME_MODE = MAIN_MENU_ID;
+//			firstBoot = 1;
+//			screen_show_letter(new_game_select + ASCII_ONE);	//show the game ID between 1 and 3
+//			row = 0;
+//			col = 0;
+//		}
+//
+//		HAL_Delay(20);
+//	}
+//	//main menu was not loaded, return to game
+//	if(row!=0 || col != 0)
+//	{
+//		screen_clear();
+//		row = 0;	//reset main-menu-loading variables
+//		col = 0;
+//	}
 
-	  snake_runGame();
-
-	  if(HAL_GPIO_ReadPin(BTN2_GPIO_Port, BTN2_Pin) == GPIO_PIN_RESET)
-		  snake_set_new_direction(GOING_UP);
-
-	  else if(HAL_GPIO_ReadPin(BTN1_GPIO_Port, BTN1_Pin) == GPIO_PIN_RESET)
-		  snake_set_new_direction(GOING_DOWN);
-
-	  else if(HAL_GPIO_ReadPin(BTN3_GPIO_Port, BTN3_Pin) == GPIO_PIN_RESET)
-		  snake_set_new_direction(GOING_LEFT);
-
-	  else if(HAL_GPIO_ReadPin(BTN4_GPIO_Port, BTN4_Pin) == GPIO_PIN_RESET)
-		  snake_set_new_direction(GOING_RIGHT);
+	switch(GAME_MODE)
+	{
+	  case GAME_SNAKE_ID:
+		  if(firstBoot == 1)
+		  {
+			  game_startNewGame();
+			  firstBoot = 0;	//de-assert flag
+		  }
+		  game_snake();
+		  break;
+	  case GAME_RACE_ID:
+		  gameRacer_run();
+		  break;
+	  case GAME_ANIM_ID:
+		  game_anim();
+		  break;
+	  /*case MAIN_MENU_ID:
+		  main_menu();
+		  break;*/
+	}
   }
   /* USER CODE END 3 */
 }
