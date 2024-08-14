@@ -1,9 +1,9 @@
-# Version 2 PCB: Using hardware buttons
+# Version 3 PCB: Using hardware buttons
 ## Change Logs
-* Replaced captouch with hardware button
-* Updated silkscreen
-* Added ADC floating pin as input to seed the random number generator.
-* Starting point for snake and apple are now randomized.
+* Denser LED matrix
+* Added Racing Game (hold "A" when powering on)
+* Added LED animation/screensaver (hold "B" when powering on)
+* Updated silkscreen and contact information
 
 # Youtube Video
-[![Youtube](http://i3.ytimg.com/vi/Rbh4C2AwiI0/maxresdefault.jpg)](https://www.youtube.com/watch?v=Rbh4C2AwiI0)
+[![Youtube](http://i3.ytimg.com/vi/kTAN805ZqHw/maxresdefault.jpg)]([https://www.youtube.com/watch?v=Rbh4C2AwiI0](https://www.youtube.com/watch?v=kTAN805ZqHw))
