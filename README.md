@@ -6,4 +6,4 @@
 * Updated silkscreen and contact information
 
 # Youtube Video
-[![Youtube](http://i3.ytimg.com/vi/kTAN805ZqHw/maxresdefault.jpg)]([https://www.youtube.com/watch?v=Rbh4C2AwiI0](https://www.youtube.com/watch?v=kTAN805ZqHw))
+[![Youtube](http://i3.ytimg.com/vi/kTAN805ZqHw/maxresdefault.jpg)](https://www.youtube.com/watch?v=kTAN805ZqHw)
