@@ -1,4 +1,4 @@
-# Version 3 PCB: Using hardware buttons
+# Version 3: Added new game mode
 ## Change Logs
 * Denser LED matrix
 * Added Racing Game (hold "A" when powering on)
