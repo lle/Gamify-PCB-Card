@@ -4,3 +4,5 @@
 * Added Racing Game (hold "A" when powering on)
 * Added LED animation/screensaver (hold "B" when powering on)
 * Updated silkscreen and contact information
+
+[![img](http://i3.ytimg.com/vi/kTAN805ZqHw/maxresdefault.jpg)](#)
